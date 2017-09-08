@@ -1,6 +1,7 @@
 # techfest2017
 
-This is a project to demonstrate how to create a very simple supply chain management tracking system on the blockchain
+This is a project to demonstrate how to create a very simple supply chain management tracking system on the blockchain. 
+The slidedeck accompanying this workshop can be found here: https://www.slideshare.net/romefort1/supply-chain-management-on-the-blockchain-with-iot-azure-bigchaindb-vuejs
 
 ## Project structure
 
