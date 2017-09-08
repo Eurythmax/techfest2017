@@ -26,15 +26,15 @@ client.open()
     .then(function (partitionIds) {
         return partitionIds.map(function (partitionId) {
             return client.createReceiver('$Default', partitionId, { 'startAfterTime' : Date.now()}).then(function(receiver) {
-              //  console.log('Created partition receiver: ' + partitionId)
+                console.log('Connected to Azure IoT hub');
                 receiver.on('errorReceived', printError);
-                receiver.on('message', immutableTransaction);
+                receiver.on('message', receivedTransaction);
             });
         });
     })
     .catch(printError);
 
-var immutableTransaction = function (message) {
+var receivedTransaction = function (message) {
   console.log('transaction received: ');
 
   var action = message.body.toString().split(":")[0];
@@ -52,7 +52,7 @@ function create_asset(assetid){
 
   const tx = driver.Transaction.makeCreateTransaction(
       { asset_id: assetid },
-      { what: 'Creation of the asset' , time: Date.now()},
+      { what: 'Creation of the asset' , time: Date.now(), asset_id: assetid},
       [ driver.Transaction.makeOutput(
               driver.Transaction.makeEd25519Condition(tetrapak.publicKey))
       ],
@@ -80,7 +80,7 @@ function transfer_asset(assetid){
 
           assets[assetid],
 
-          {what: "a transfer maybe", time:Date.now()},
+          {what: "Transfer of the asset", time:Date.now(), asset_id:assetid},
           [
               driver.Transaction.makeOutput(
                   driver.Transaction.makeEd25519Condition(tetrapak_facility1.publicKey)

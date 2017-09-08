@@ -2,11 +2,8 @@
   <div id="app">
 
       <el-tabs v-model="activeName" @tab-click="handleClick">
-        <el-tab-pane label="User" name="first"></el-tab-pane>
-        <el-tab-pane label="Config" name="second"></el-tab-pane>
-        <el-tab-pane label="Role" name="third"></el-tab-pane>
+        <el-tab-pane label="All Transactions" name="first"></el-tab-pane>
       </el-tabs>
-
 
     <router-view></router-view>
 
@@ -14,26 +11,22 @@
 </template>
 
 <script>
+
 import Mentors from './LiveAdminTable.vue';
 import store from '../store/store.js';
 import router from '../router/router.js';
-
 import VueSocketio from 'vue-socket.io';
 
 export default {
-  data () {
-    return {
-      msg: 'Use Vue 2.0 Today!'
-    }
-  },
+
   components: {
-    Mentors
+  //  LiveAdminTable
   },
 
   methods: {
 
     handleClick(tab, event) {
-      console.log("boo");
+      console.log('switching to another tab');
       router.push({ path: 'admin' })
 
     }

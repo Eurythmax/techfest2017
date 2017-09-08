@@ -70,9 +70,7 @@ void array_to_string(byte array[], unsigned int len, char buffer[])
 
 void loop() {
 
-   if (!client.connected()) {
-      reconnect();
-   }
+
 
   if ( ! mfrc522.PICC_IsNewCardPresent()) {
     delay(50);
@@ -82,6 +80,10 @@ void loop() {
   if ( ! mfrc522.PICC_ReadCardSerial()) {
     delay(50);
     return;
+  }
+
+  if (!client.connected()) {
+     reconnect();
   }
 
   unsigned long UID_unsigned;

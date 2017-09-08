@@ -47,7 +47,6 @@ app.use(function(req, res, next) {
 io.on('connection', function(client) {
     console.log('Client connected...');
 
-
     client.on('join', function(data) {
         console.log(data);
     });
@@ -64,14 +63,19 @@ app.use(function(err, req, res, next) {
 });
 
 ws.on('open', function open() {
-  console.log('connection opened');
-  //ws.send('something');
+  console.log('WebSocket connection to IPDB opened');
 });
 
 ws.on('message', function incoming(data) {
   var o = JSON.parse(data);
   console.log(data);
-  conn.getTransaction(o.transaction_id).then(details =>   io.emit('transactionCreated', details));
+  
+  conn.getTransaction(o.transaction_id).then(details =>   {
+    console.log(details);
+    if (details.metadata.asset_id != null)
+      io.emit('transactionCreated', details);
+    }
+  );
 
 });
 

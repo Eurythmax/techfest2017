@@ -6,7 +6,7 @@
 
     <el-table-column
       label="asset"
-      prop="asset.data.asset_id">
+      prop="metadata.asset_id">
     </el-table-column>
     <el-table-column
       label="operation"
